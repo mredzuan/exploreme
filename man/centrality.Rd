@@ -7,8 +7,25 @@
 centrality(x, ...)
 }
 \arguments{
-\item{x}{Support data.frame and vector object class}
+\item{x}{data.frame or vector type object class}
+
+\item{...}{Additional arguments affecting the centrality metrics produced.}
 }
 \description{
 S3 Generic function for statistic centrality
+}
+\examples{
+\dontrun{
+
+#Centrality for data.frame object
+
+centrality_iris <- centrality(iris)
+
+
+#Centrality for numeric object
+
+centrality_num <- centrality(c(1, 2, 3, 3, 4, 4, 4))
+
+}
+
 }

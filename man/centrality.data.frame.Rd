@@ -17,10 +17,3 @@ List object that summarize all numeric columns in data.frame object into mean, m
 \description{
 Function to generate statistical centrality metrics for data.frame class object
 }
-\examples{
-\dontrun{
-
-centrality_iris <- centrality(iris)
-
-}
-}
