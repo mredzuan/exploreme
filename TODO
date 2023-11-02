@@ -1,0 +1,17 @@
+1. Measure of Center
+  1.1. Mean, Median, Mode
+
+2. Measure of Spread
+  2.1. Range, Max, Minimum
+  2.2. Variance, Standard deviation
+
+
+3. Quartile
+  3.1. Splitting data to default partition: 0, 25, 50, 75 & 100 %
+  3.2. IQR
+
+
+4. Basic plot
+  4.1. Histogram
+  4.2. Density plot
+  4.3. Box plot
