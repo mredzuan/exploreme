@@ -1,12 +1,16 @@
 Package: exploreme
-Title: What the Package Does (One Line, Title Case)
+Title: Provide Statistical and Analytic Summary for Dataset
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Mohd Redzuan", "Abdul Rahman", email = "redzu.m@gmail.com", role = c("aut", "cre"))
+Description: YourPackageName is an R package designed to empower data analysts, scientists, 
+    and researchers with a comprehensive toolkit for gaining deep insights from their data. 
+    Harness the power of advanced statistical and analytic techniques to uncover hidden patterns, trends, 
+    and valuable knowledge in your datasets.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Imports: 
+    DescTools,
+    stats
