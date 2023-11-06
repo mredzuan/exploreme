@@ -2,7 +2,7 @@
 % Please edit documentation in R/centrality.R
 \name{centrality}
 \alias{centrality}
-\title{S3 Generic function for statistic centrality}
+\title{S3 Generic function for statistical centrality values}
 \usage{
 centrality(x, ...)
 }
@@ -12,7 +12,7 @@ centrality(x, ...)
 \item{...}{Additional arguments affecting the centrality metrics produced.}
 }
 \description{
-S3 Generic function for statistic centrality
+S3 Generic function for statistical centrality values
 }
 \examples{
 \dontrun{
