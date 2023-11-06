@@ -1,4 +1,4 @@
-#' S3 Generic function for statistic centrality
+#' S3 Generic function for statistical centrality values
 #'
 #' @param x data.frame or vector type object class
 #' @param ... Additional arguments affecting the centrality metrics produced.
@@ -49,10 +49,6 @@ centrality.data.frame <- function(x, remove_na = TRUE) {
 }
 
 
-
-
-
-
 #' Function to generate statistical centrality metrics for numeric class object
 #'
 #' @param x Numeric vector
@@ -81,17 +77,6 @@ centrality.numeric <- function(x, remove_na = TRUE) {
 centrality.default <- function(x){
   stop("Please input object with data.frame or numeric class!")
 }
-
-
-
-#Test---------
-
-# df_test <- data.frame(
-#   Name = c("Alice", "Bob", "Charlie", "David", "Eve", "Redz"),
-#   Age = c(25, NA, 30, 28, 22, 22),
-#   Height = c(160, 175, 180, NA, 165, 165),
-#   Weight = c(55, 75, NA, 68, 60, 60)
-# )
 
 
 
