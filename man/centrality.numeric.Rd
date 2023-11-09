@@ -4,12 +4,14 @@
 \alias{centrality.numeric}
 \title{Function to generate statistical centrality metrics for numeric class object}
 \usage{
-\method{centrality}{numeric}(x, remove_na = TRUE)
+\method{centrality}{numeric}(x, remove_na = TRUE, ...)
 }
 \arguments{
 \item{x}{Numeric vector}
 
 \item{remove_na}{a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.}
+
+\item{...}{Ignored}
 }
 \value{
 List object that summarize numeric vector into mean, median and mode

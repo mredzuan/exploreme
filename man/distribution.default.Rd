@@ -4,10 +4,12 @@
 \alias{distribution.default}
 \title{Default method for distribution generic function}
 \usage{
-\method{distribution}{default}(x)
+\method{distribution}{default}(x, ...)
 }
 \arguments{
 \item{x}{Object}
+
+\item{...}{Ignored}
 }
 \description{
 Default method for distribution generic function

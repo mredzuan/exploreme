@@ -4,12 +4,14 @@
 \alias{centrality.data.frame}
 \title{Function to generate statistical centrality metrics for data.frame class object}
 \usage{
-\method{centrality}{data.frame}(x, remove_na = TRUE)
+\method{centrality}{data.frame}(x, remove_na = TRUE, ...)
 }
 \arguments{
 \item{x}{Data Frame.}
 
-\item{remove_na}{a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.}
+\item{remove_na}{a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds}
+
+\item{...}{Ignored}
 }
 \value{
 List object that summarize all numeric columns in data.frame object into mean, median and mode
