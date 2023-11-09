@@ -36,12 +36,13 @@ distribution <- function(x, ...){
 #' @param x Numeric vector
 #' @param remove_na A logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.
 #' @param probs numeric vector of probabilities with values in value from 0 to 1 (e.g: default c(0, 0.25, 0.5, 0.75, 1))
+#' @param ... Ignored
 #'
 #' @return A list of statistical distribution which include min, max, and quantile values of numeric values from vector object
 #' @export
 #'
 #' @seealso [distribution()]
-distribution.numeric <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1)){
+distribution.numeric <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1), ...){
 
   min_val <- min(x, na.rm = remove_na)
   max_val <- max(x, na.rm = remove_na)
@@ -64,17 +65,22 @@ distribution.numeric <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5, 0.
 #' @param x data.frame object
 #' @param remove_na A logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.
 #' @param probs numeric vector of probabilities with values in value from 0 to 1 (e.g: default c(0, 0.25, 0.5, 0.75, 1))
+#' @param ... Ignored
 #'
 #' @return A list of statistical distribution which include min, max, and quantile values of numeric values from data.frame
 #' @export
 #'
 #' @seealso [distribution()]
-distribution.data.frame <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1)){
+distribution.data.frame <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1), ...){
 
   numeric_columns <- sapply(x, is.numeric)
-  numeric_df <- x[, numeric_columns]
+  numeric_res <- x[, numeric_columns]
 
-  res <- lapply(numeric_df, distribution, remove_na = remove_na, probs = probs)
+  if(is.numeric(numeric_res)){
+    res <- distribution(numeric_res, remove_na = remove_na, probs = probs)
+  } else if(is.data.frame(numeric_res)){
+    res <- lapply(numeric_res, distribution, remove_na = remove_na, probs = probs)
+  }
 
   return(res)
 
@@ -84,7 +90,8 @@ distribution.data.frame <- function(x, remove_na = TRUE, probs = c(0, 0.25, 0.5,
 #' Default method for distribution generic function
 #'
 #' @param x Object
+#' @param ... Ignored
 #' @export
-distribution.default <- function(x){
+distribution.default <- function(x, ...){
   stop("Please input object with data.frame or numeric class!")
 }

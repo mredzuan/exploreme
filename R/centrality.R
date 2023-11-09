@@ -28,24 +28,26 @@ centrality <- function(x, ...){
 #' Function to generate statistical centrality metrics for data.frame class object
 #'
 #' @param x Data Frame.
-#' @param remove_na a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.
+#' @param remove_na a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds
+#' @param ... Ignored
 #'
 #' @return List object that summarize all numeric columns in data.frame object into mean, median and mode
 #' @export
 
-centrality.data.frame <- function(x, remove_na = TRUE) {
+centrality.data.frame <- function(x, remove_na = TRUE, ...) {
+
 
   numeric_columns <- sapply(x, is.numeric)
-  numeric_df <- x[, numeric_columns]
+  numeric_res <- x[, numeric_columns]
 
-  centrality_list <- lapply(numeric_df, function(col, ...){
-    mean_val <- mean(col, na.rm = remove_na)
-    median_val <- median(col, na.rm = remove_na)
+  if(is.numeric(numeric_res)){
+    res <- centrality(numeric_res, remove_na = remove_na)
+  } else if(is.data.frame(numeric_res)){
+    res <- lapply(numeric_res, centrality, remove_na = remove_na)
+  }
 
-    mode_val <- DescTools::Mode(col, na.rm = remove_na)
-    res <- list(mean = mean_val, median = median_val, mode = mode_val)
-    return(res)
-  })
+  return(res)
+
 }
 
 
@@ -53,10 +55,10 @@ centrality.data.frame <- function(x, remove_na = TRUE) {
 #'
 #' @param x Numeric vector
 #' @param remove_na a logical evaluating to TRUE or FALSE indicating whether NA values should be stripped before the computation proceeds.
-#'
+#' @param ... Ignored
 #' @return List object that summarize numeric vector into mean, median and mode
 #' @export
-centrality.numeric <- function(x, remove_na = TRUE) {
+centrality.numeric <- function(x, remove_na = TRUE, ...) {
 
   mean_val <- mean(x, na.rm = remove_na)
   median_val <- median(x, na.rm = remove_na)
@@ -73,11 +75,9 @@ centrality.numeric <- function(x, remove_na = TRUE) {
 #' Default method for centrality generic function
 #'
 #' @param x Object
+#' @param ... Ignored
 #' @export
-centrality.default <- function(x){
+centrality.default <- function(x, ...){
   stop("Please input object with data.frame or numeric class!")
 }
-
-
-
 
