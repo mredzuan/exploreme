@@ -42,5 +42,11 @@ file_meta_data <- function(file_path){
 }
 
 
+# Import csv file--------------------------------------------------------------------------------
+
+file_csv_eg <- "dataset_example/Volve_production_data_manipulated.csv"
+
+import_csv <- read.csv("dataset_example/twitter_training.csv")
+import_csv2 <- read.csv("dataset_example/iris.csv")
 
 
