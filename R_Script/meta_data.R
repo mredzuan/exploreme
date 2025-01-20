@@ -1,4 +1,5 @@
 library(tools)
+library(readxl)
 
 
 # function to obtain file meta data from a directory and convert to a list
@@ -50,3 +51,59 @@ import_csv <- read.csv("dataset_example/twitter_training.csv")
 import_csv2 <- read.csv("dataset_example/iris.csv")
 
 
+# Import Excel file--------------------------------------------------------------------------------
+import_excel <- read_excel("dataset_example/Volve_production_data_manipulated.xlsx")
+
+
+# Import PDF file--------------------------------------------------------------------------------
+# TO DO--
+
+
+
+
+# Function to read file and return data frame-----------------------------------------------------
+
+read_file <- function(file_path){(
+  tryCatch({
+    file_extension <- file_ext(file_path)
+
+    if(file_extension == "csv"){
+      df = read.csv(file_path)
+      return(df)
+    } else if(file_extension == "xlsx"){
+      df = read_excel(file_path)
+      return(df)
+    } else {
+      message("File type is not supported")
+    }
+
+  }, error = function(e){
+    print("Error to read file")
+  })
+)}
+
+test_read_file <- read_file("dataset_example/Volve_production_data_manipulated.xlsx")
+
+
+
+
+# create meta_data & read file df as list with embedded note attribute---------------------------------------------------------
+
+meta_data_n_df <- function(file_path, note = NULL){
+  tryCatch({
+    file_meta_data <- file_meta_data(file_path)
+    df <- read_file(file_path)
+
+    meta_data_n_df <- list(file_meta_data = file_meta_data,
+                           df = df)
+    meta_data_n_df$note <- note
+    return(meta_data_n_df)
+
+  }, error = function(e){
+    return(NULL)
+  })
+}
+
+
+#test mete_data_n_df function--------
+test_meta_data_n_df <- meta_data_n_df("dataset_example/Volve_production_data_manipulated.xlsx", "This is a test note")
