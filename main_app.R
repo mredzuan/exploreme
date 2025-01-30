@@ -3,6 +3,9 @@
 library(shiny)
 library(shinydashboard)
 
+# Source the modules----------------
+source("module/import_data_module.R")
+
 
 #UI-------------------
 
@@ -12,7 +15,7 @@ ui <- dashboardPage(
 
   dashboardHeader(title = "ExploreMe App"),
 
-  ## Navigation Sidebar-------------
+  ## Sidebar Navigation -------------
   dashboardSidebar(
     sidebarMenu(
       menuItem("Import Data", tabName = "import_data", icon = icon("file-import")),
@@ -26,21 +29,14 @@ ui <- dashboardPage(
   ),
 
 
-  ## Body of Dashboard----------------
+  ## App Body ----------------
   dashboardBody(
     includeCSS("www/styles.css"),
 
     tabItems(
-      # First tab content
-      tabItem(tabName = "dashboard",
-              fluidRow(
-                box(plotOutput("plot1", height = 250)),
-
-                box(
-                  title = "Controls",
-                  sliderInput("slider", "Number of observations:", 1, 100, 50)
-                )
-              )
+      ### Import Data UI--------------
+      tabItem(tabName = "import_data",
+             mod_import_data_ui("import_data")
       ),
 
       # Second tab content
@@ -52,7 +48,20 @@ ui <- dashboardPage(
 )
 
 
+# SERVER--------------------------------
+
 server <- function(input, output) {
+
+
+  ### Import Data Server -------------------
+  datasets <- mod_import_data_server("import_data")
+
+
+  #Debugging---------------
+
+  observe({
+    print(names(datasets()))
+  })
 
 }
 
