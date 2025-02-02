@@ -45,25 +45,9 @@ server <- function(input, output, session){
 
   options(shiny.maxRequestSize = 30*1024^2)
 
-  datasets <- reactive({
+  input_dataset <- reactive({
     req(input$upload_file)
-
-    uploaded_files <- input$upload_file
-
-    file_list <- lapply(uploaded_files$datapath, function(path) {
-      ext <- tools::file_ext(path)
-      if (ext == "csv") {
-        read.csv(path)
-      } else if (ext == "xlsx") {
-        read_excel(path)
-      } else {
-        return(NULL)
-      }
-
-    })
-
-    names(file_list) <- input$upload_file$name
-    return(file_list)
+    input$upload_file
 
   })
 
@@ -73,7 +57,7 @@ server <- function(input, output, session){
 
 
   observe(
-    print(names(datasets()))
+    print(input_dataset()$datapath)
   )
 
 }

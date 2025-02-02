@@ -2,8 +2,10 @@
 
 library(shiny)
 library(shinydashboard)
+library(fresh)
 
-# Source the modules----------------
+# Source the functions & modules----------------
+source("function/fresh_theme.R")
 source("module/import_data_module.R")
 
 
@@ -14,6 +16,7 @@ ui <- dashboardPage(
 
 
   dashboardHeader(title = "ExploreMe App"),
+
 
   ## Sidebar Navigation -------------
   dashboardSidebar(
@@ -31,7 +34,9 @@ ui <- dashboardPage(
 
   ## App Body ----------------
   dashboardBody(
-    includeCSS("www/styles.css"),
+    #includeCSS("www/styles.css"),
+
+    use_theme(mytheme),
 
     tabItems(
       ### Import Data UI--------------
@@ -54,13 +59,13 @@ server <- function(input, output) {
 
 
   ### Import Data Server -------------------
-  datasets <- mod_import_data_server("import_data")
+  input_dataset <- mod_import_data_server("import_data")
 
 
   #Debugging---------------
 
   observe({
-    print(names(datasets()))
+    print(file.info(input_dataset()$datapath))
   })
 
 }

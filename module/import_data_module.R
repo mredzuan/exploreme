@@ -45,25 +45,9 @@ mod_import_data_server <- function(id) {
 
     options(shiny.maxRequestSize = 30*1024^2)
 
-    datasets <- reactive({
+    input_dataset <- reactive({
       req(input$upload_file)
-
-      uploaded_files <- input$upload_file
-
-      file_list <- lapply(uploaded_files$datapath, function(path) {
-        ext <- tools::file_ext(path)
-        if (ext == "csv") {
-          read.csv(path)
-        } else if (ext == "xlsx") {
-          read_excel(path)
-        } else {
-          return(NULL)
-        }
-
-      })
-
-      names(file_list) <- input$upload_file$name
-      return(file_list)
+      input$upload_file
 
     })
 
