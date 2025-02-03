@@ -52,12 +52,11 @@ server <- function(input, output, session){
   })
 
 
-
   #Debugging & Testing-----------------------------
 
 
   observe(
-    print(input_dataset()$datapath)
+    print(input_dataset())
   )
 
 }

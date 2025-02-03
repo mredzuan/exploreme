@@ -65,7 +65,7 @@ server <- function(input, output) {
   #Debugging---------------
 
   observe({
-    print(file.info(input_dataset()$datapath))
+    print(input_dataset())
   })
 
 }
