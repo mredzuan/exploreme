@@ -25,7 +25,8 @@ mod_import_data_ui <- function(id){
     fluidRow(
       column(10,
              wellPanel(
-               h3("Load Data from Database"),
+               h3("Load Data from Database", style = "color: red; font-weight: bold;"),
+               h4("Coming Soon!", style = "color: red; font-wigth: bold;"),
                textInput(ns("server"), label = "Server", value = NULL),
                textInput(ns("db_name"), label = "Database Name", value = NULL),
                passwordInput(ns("sql_password"), label = "Password"),
