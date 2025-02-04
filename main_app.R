@@ -1,12 +1,18 @@
+options(shiny.reactlog=TRUE)
+
+
 # Load libraries------------
 
 library(shiny)
 library(shinydashboard)
+library(DT)
 library(fresh)
 
 # Source the functions & modules----------------
 source("function/fresh_theme.R")
 source("module/import_data_module.R")
+
+source("module/debugging_module.R")
 
 
 #UI-------------------
@@ -27,7 +33,9 @@ ui <- dashboardPage(
       menuItem("Visual Exploration", tabName = "data_exploration", icon = icon("chart-simple")),
       menuItem("Text Analytics", tabName = "text_analytics", icon = icon("spell-check")),
       menuItem("Anomaly Detection", tabName = "anomaly_detection", icon = icon("magnifying-glass-chart")),
-      menuItem("Machine Learning Insights", tabName = "ml_insights", icon = icon("cogs"))
+      menuItem("Machine Learning Insights", tabName = "ml_insights", icon = icon("cogs")),
+      hr(),
+      menuItem("Debugging", tabName = "debugging", icon = icon("bug"))
     )
   ),
 
@@ -43,6 +51,13 @@ ui <- dashboardPage(
       tabItem(tabName = "import_data",
              mod_import_data_ui("import_data")
       ),
+
+      ### Debugging tab content------------------
+      tabItem(tabName = "debugging",
+              h2("Place holder for debugging purposes"),
+
+              mod_debug_ui("debug_module")
+              ),
 
       # Second tab content
       tabItem(tabName = "widgets",
@@ -63,6 +78,8 @@ server <- function(input, output) {
 
 
   #Debugging---------------
+
+  mod_debug_server("debug_module", input_dataset)
 
   observe({
     print(input_dataset())
