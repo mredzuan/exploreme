@@ -1,4 +1,5 @@
 options(shiny.reactlog=TRUE)
+#options(shiny.fullstacktrace=TRUE)
 
 
 # Load libraries------------
@@ -11,6 +12,11 @@ library(fresh)
 # Source the functions & modules----------------
 source("function/fresh_theme.R")
 source("module/import_data_module.R")
+source("module/imported_data_obj_view_module.R")
+
+
+
+
 
 source("module/debugging_module.R")
 
@@ -46,11 +52,19 @@ ui <- dashboardPage(
 
     use_theme(mytheme),
 
+    #bookmarkButton(),
+
     tabItems(
       ### Import Data UI--------------
       tabItem(tabName = "import_data",
              mod_import_data_ui("import_data")
-      ),
+             ),
+
+      tabItem(tabName = "imported_data",
+
+              mod_import_data_obj_view_ui("imported_data_obj")
+
+              ),
 
       ### Debugging tab content------------------
       tabItem(tabName = "debugging",
@@ -77,6 +91,10 @@ server <- function(input, output) {
   input_dataset <- mod_import_data_server("import_data")
 
 
+  ### Imported Data Object View Server -------------------
+  mod_import_data_obj_view_server("imported_data_obj", input_dataset)
+
+
   #Debugging---------------
 
   mod_debug_server("debug_module", input_dataset)
@@ -85,7 +103,11 @@ server <- function(input, output) {
     print(input_dataset())
   })
 
-}
+  observe({
+    print(seq_len(nrow(input_dataset())))
+  })
+
+  }
 
 
 shinyApp(ui, server)
