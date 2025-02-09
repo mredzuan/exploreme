@@ -39,7 +39,7 @@ ui <- fluidPage(
   fluidRow(
     column(12,
            h3("Imported File Information"),
-           dataTableOutput("object_info_table")
+           uiOutput("file_info_ui")
            )
 
   )
@@ -67,13 +67,24 @@ server <- function(input, output, session){
 
     df <- input_dataset()
 
+    if (nrow(df) == 0) return(NULL)
+
     data.frame(
-      `No.` = seq_len(nrow(df)),
       `File Name` = df$name,
       `Size (KB)` = round(df$size / 1024, 2),
       `Type` = df$type,
       stringsAsFactors = FALSE
     )
+  })
+
+
+  output$file_info_ui <- renderUI({
+    if (is.null(object_info())) {
+      tags$p("Nothing to display, please import a dataset!",
+             style = "color: red; font-weight: bold;")
+    } else {
+      DT::dataTableOutput("object_info_table")
+    }
   })
 
 
@@ -86,7 +97,7 @@ server <- function(input, output, session){
 
 
   observe(
-    print(object_info())
+    print(is.null(object_info()))
   )
 
 }
