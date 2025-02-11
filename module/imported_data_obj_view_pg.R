@@ -56,29 +56,29 @@ server <- function(input, output, session){
   options(shiny.maxRequestSize = 30*1024^2)
 
   input_dataset <- reactive({
-    req(input$upload_file)
+    #req(input$upload_file)
     input$upload_file
 
   })
 
 
   object_info <- reactive({
-    req(input_dataset())
+
+    #req(input_dataset())
 
     df <- input_dataset()
+      data.frame(
+        `File Name` = df$name,
+        `Size (KB)` = round(df$size / 1024, 2),
+        `Type` = df$type,
+        stringsAsFactors = FALSE
+      )
 
-    if (nrow(df) == 0) return(NULL)
-
-    data.frame(
-      `File Name` = df$name,
-      `Size (KB)` = round(df$size / 1024, 2),
-      `Type` = df$type,
-      stringsAsFactors = FALSE
-    )
   })
 
-
   output$file_info_ui <- renderUI({
+
+
     if (is.null(object_info())) {
       tags$p("Nothing to display, please import a dataset!",
              style = "color: red; font-weight: bold;")
@@ -97,7 +97,7 @@ server <- function(input, output, session){
 
 
   observe(
-    print(is.null(object_info()))
+    print(input_dataset())
   )
 
 }
