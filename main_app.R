@@ -1,3 +1,6 @@
+#TO DO-------
+# Explore different method to handle imported considering data persistence upon multiple file uploaded
+
 options(shiny.reactlog=TRUE)
 #options(shiny.fullstacktrace=TRUE)
 
